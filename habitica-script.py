@@ -85,26 +85,18 @@ def main():
     """
     Main function to create tasks on Habitica.
 
-    This function defines a list of tasks to create, where each task is represented
-    as a tuple containing:
-    - The text (str) of the todo task.
-    - Additional notes (str) for the todo task, which can include URLs or other
-      relevant details. If no note is provided, it defaults to an empty string.
-
-    It generates a list of due dates and creates the tasks on Habitica for each due date.
+    This function repeatedly prompts the user for todo titles and notes, generates a list of
+    due dates, and creates the tasks on Habitica for each due date until the user decides to stop.
     """
-    tasks = [
-        ("Sample Todo Task 1", "https://www.google.com"),
-        ("Sample Todo Task 2", "https://www.wikipedia.org"),
-        ("Sample Todo Task 3",),  # No note provided, should default to ""
-    ]
-
     today = datetime.now()
     due_dates = generate_due_dates(today, (2, 7, 14, 30, 90))
 
-    for task in tasks:
-        text = task[0]
-        note = task[1] if len(task) > 1 else ""  # Default note to "" if not provided
+    while True:
+        text = input("Enter the todo title (or type 'done' to finish): ")
+        if text.lower() == "done":
+            break
+        note = input("Enter the todo note: ")
+
         for due_date in due_dates:
             create_todo(text, due_date, note)
 
