@@ -1,2 +1,6 @@
 .env
 app.log
+credentials.json
+token.json
+
+*.log 
