@@ -1,83 +1,134 @@
-## Habitica Todo Creator
 
-This Python program automates the creation of todo tasks on your Habitica account. It allows you to define tasks with specific text, notes, and due dates.
+<h1 align="center">TODO-POMODORO</h1>
 
-**Features:**
+<p align="center">
+	<img src="https://img.shields.io/github/license/saminkhan1/todo-pomodoro?style=flat&color=0080ff" alt="license">
+	<img src="https://img.shields.io/github/last-commit/saminkhan1/todo-pomodoro?style=flat&logo=git&logoColor=white&color=0080ff" alt="last-commit">
+	<img src="https://img.shields.io/github/languages/top/saminkhan1/todo-pomodoro?style=flat&color=0080ff" alt="repo-top-language">
+	<img src="https://img.shields.io/github/languages/count/saminkhan1/todo-pomodoro?style=flat&color=0080ff" alt="repo-language-count">
+</p>
 
-* Creates Habitica todo tasks
-* Supports due dates at 11:00 PM on specified days
-* Handles notes and defaults to an empty string when not provided
-* Logs successful creations and errors
+<hr>
 
-**Requirements:**
+## Quick Links
 
-* Python 3.x
-* `requests` library (install with `pip install requests`)
-* `dotenv` library (install with `pip install python-dotenv`)
-* A Habitica account with API access enabled
+- [Overview](#overview)
+- [Repository Structure](#repository-structure)
+- [Modules](#modules)
+- [Getting Started](#getting-started)
+- [Contributing](#contributing)
+- [License](#license)
 
-**Instructions:**
+---
 
-1. **Set up Habitica API Access:**
+## Overview
 
-   - Go to your Habitica settings ([https://habitica.com/user/settings/general](https://habitica.com/user/settings/general)).
-   - Generate a new API token.
-   - Create a file named `.env` in the same directory as this program. Add the following lines to the file, replacing the placeholders with your actual values:
+The **TODO-POMODORO** project provides an efficient task management solution by integrating with popular platforms like Habitica, Todoist, and Google Tasks. It simplifies task creation, allowing users to manage tasks with due dates and details across multiple platforms via scripts like `habitica-script.py`, `todoist-script.py`, and `google_task-script.py`. This tool is designed for individuals aiming to enhance productivity and organization.
 
-     ```
-     USER_ID=<your_habitica_user_id>
-     API_TOKEN=<your_habitica_api_token>
-     ```
+---
 
-2. **Customize Tasks:**
+## Repository Structure
 
-   - Modify the `tasks` list in the `main` function to define your desired todo tasks. Each task is a tuple containing:
-      - Text (str): The main content of the todo task.
-      - Notes (str, optional): Additional information related to the task. Can include URLs. Defaults to an empty string if not provided.
-    - Modify the second parameter to the function `generate_due_dates` to change the days you want the task to be due. You can have one day or multiple days based on your needs.
-
-3. **Run the Program:**
-
-   - Open a terminal or command prompt and navigate to the directory containing this program and the `.env` file.
-   - Run the program using:
-
-     ```bash
-     python habitica-script.py
-     ```
-
-**Example Usage:**
-
-```python
-tasks = [
-    ("Sample Todo Task 1", "https://www.google.com"),
-    ("Sample Todo Task 2", "https://www.wikipedia.org"),
-    ("Sample Todo Task 3",),  # No note provided, should default to ""
-]
-
-
-today = datetime.now()
-due_dates = generate_due_dates(today, (2, 7, 14))  # Create tasks due in 2, 7, and 14 days
-
-for task in tasks:
-    text = task[0]
-    note = task[1] if len(task) > 1 else ""
-    for due_date in due_dates:
-        create_todo(text, due_date, note)
+```sh
+└── todo-pomodoro/
+    ├── README.md
+    ├── google_task-script.py
+    ├── habitica-script.py
+    └── todoist-script.py
 ```
 
-This example will create three Habitica todo tasks:
+---
 
-1. "Sample Todo Task 1" with a note linking to a google.
-2. "Sample Todo Task 2",with a note linking to wikipedia.
-3. "Sample Todo Task 3"" with no note.
 
-    all of the todo task will repeat 3 times each due in 2, 7, 14 days from today
+## Modules
 
-**Logging:**
+<details closed><summary>.</summary>
 
-The program logs its activity to a file named `app.log` in the same directory. It records successful todo creations and any errors encountered during the process.
+| File                                                                                                   | Summary                                                                                                                                                                                                    |
+| ---                                                                                                    | ---                                                                                                                                                                                                        |
+| [habitica-script.py](https://github.com/saminkhan1/todo-pomodoro/blob/master/habitica-script.py)       | **habitica-script.py:** This script automates the creation of tasks in Habitica by interacting with the Habitica API. It prompts the user for task details, including title and notes, and schedules tasks based on spaced repetition. The script handles due dates, error logging, and ensures tasks are created with specific priorities. |
+| [todoist-script.py](https://github.com/saminkhan1/todo-pomodoro/blob/master/todoist-script.py)         | **todoist-script.py:** This script integrates with the Todoist API to create and manage tasks with priority and spaced repetition. It fetches available projects, prompts the user for task details, and schedules tasks with due dates for spaced repetition. The script logs each task creation process and handles errors effectively.|
+| [google_task-script.py](https://github.com/saminkhan1/todo-pomodoro/blob/master/google_task-script.py) | **google_task-script.py:** This script interacts with the Google Tasks API to create and manage tasks within Google Tasks. It includes functionality to authenticate users, list task lists, create new tasks with due dates, and handle errors gracefully. The script prompts the user to select a task list and enter details for the tasks they wish to create, then schedules the tasks based on predefined due dates.                                                                                                           |
 
-**Additional Notes:**
+</details>
 
-* The program currently generates due dates set to 11:00 PM. You can modify the `generate_due_dates` function if you need different times.
-* Consider adding error handling for potential issues like missing environment variables or invalid API credentials.
+---
+
+## Getting Started
+
+### Installation
+
+1. Clone the repository:
+
+```sh
+git clone https://github.com/saminkhan1/todo-pomodoro
+```
+
+2. Navigate to the project directory:
+
+```sh
+cd todo-pomodoro
+```
+
+3. Install the required dependencies:
+
+```sh
+pip install -r requirements.txt
+```
+
+### Running TODO-POMODORO
+
+To start the application (for example google task version), run:
+
+```sh
+python google_task-script.py
+```
+
+---
+
+## Contributing
+
+Contributions are welcome! Here’s how you can contribute:
+
+- **[Submit Pull Requests](https://github.com/saminkhan1/todo-pomodoro/blob/main/CONTRIBUTING.md)**: Review open PRs, or submit your own.
+- **[Join Discussions](https://github.com/saminkhan1/todo-pomodoro/discussions)**: Share insights, ask questions, or provide feedback.
+- **[Report Issues](https://github.com/saminkhan1/todo-pomodoro/issues)**: Log bugs or feature requests.
+
+<details>
+    <summary>Contributing Guidelines</summary>
+
+1. **Fork the Repository**: Fork the project repository to your GitHub account.
+2. **Clone Locally**: Clone the forked repository to your local machine.
+   ```sh
+   git clone https://github.com/saminkhan1/todo-pomodoro
+   ```
+3. **Create a New Branch**: Work on a new branch.
+   ```sh
+   git checkout -b new-feature-x
+   ```
+4. **Make Changes**: Develop and test your changes locally.
+5. **Commit Changes**: Commit with a clear message.
+   ```sh
+   git commit -m 'Implemented new feature x.'
+   ```
+6. **Push to GitHub**: Push changes to your forked repository.
+   ```sh
+   git push origin new-feature-x
+   ```
+7. **Submit a Pull Request**: Create a PR against the original repository.
+
+</details>
+
+---
+
+## License
+
+This project is licensed under the [INSERT LICENSE NAME](https://choosealicense.com/licenses) License. For more details, refer to the [LICENSE](https://choosealicense.com/licenses/) file.
+
+---
+
+[**Return to Quick Links**](#quick-links)
+
+---
+
+This version is concise, focusing on the most critical information while removing unnecessary sections.
